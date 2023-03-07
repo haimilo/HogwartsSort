@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "hogwarts-short-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/hogwartsShort/HogwartsShortWebPart.js",
+          "manifest": "./src/webparts/hogwartsShort/HogwartsShortWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "HogwartsShortWebPartStrings": "lib/webparts/hogwartsShort/loc/{locale}.js"
+  }
+}
