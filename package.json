@@ -26,9 +26,7 @@
     "@pnp/sp": "^3.12.1",
     "office-ui-fabric-react": "^7.199.1",
     "react": "17.0.1",
-    "react-awesome-reveal": "^4.2.3",
     "react-dom": "17.0.1",
-    "react-random-reveal": "^2.0.0",
     "tslib": "2.3.1"
   },
   "devDependencies": {
