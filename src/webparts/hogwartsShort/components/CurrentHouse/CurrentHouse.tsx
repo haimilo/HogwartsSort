@@ -1,30 +1,50 @@
 import { Button } from "@mui/material";
+import { SPFI } from "@pnp/sp";
 import * as React from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
-import { RandomReveal } from "react-random-reveal";
+import { useEffect, useState } from "react";
+import { getSP } from "../../../../pnpConfig";
 import { ICurrentHouse } from "./ICurrentHouse";
 
 const HouseList = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"];
 
 const CurrentHouse = (props: ICurrentHouse) => {
-  const { studentData } = props;
+  const { studentData, context } = props;
   const [currentHouse, _setCurrentHouse] = useState<string>(
     studentData && studentData.CurrentHouse ? studentData.CurrentHouse : ""
   );
-  console.log("currentHouse", currentHouse);
+
+  let _sp: SPFI = getSP(context);
+  const LIST_NAME = "Hogwarts Students";
 
   const [_isSortHouse, _setIsSortHouse] = useState<boolean>(false);
 
-  const handleRandomHouse = useCallback(() => {
+  const handleRandomHouse = () => {
     const randomHouse = HouseList[Math.floor(Math.random() * HouseList.length)];
     const isSameHouse = randomHouse === currentHouse;
     if (isSameHouse) {
       handleRandomHouse();
     }
-    console.log("randomHouse", randomHouse);
     _setCurrentHouse(randomHouse);
     _setIsSortHouse(true);
-  }, [currentHouse, _isSortHouse]);
+  };
+
+  const UpdateStudentHouse = async () => {
+    try {
+      await _sp.web.lists
+        .getByTitle(LIST_NAME)
+        .items.getById(studentData.Id)
+        .update({
+          CurrentHouse: currentHouse,
+          CurrentDateandTime: new Date(),
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    UpdateStudentHouse();
+  }, [currentHouse]);
 
   useEffect(() => {
     if (studentData && studentData.CurrentHouse) {
@@ -32,48 +52,32 @@ const CurrentHouse = (props: ICurrentHouse) => {
     }
   }, [studentData]);
 
-  const ShowHouse = useMemo(() => {
-    return (
-      <RandomReveal
-        isPlaying={_isSortHouse}
-        duration={0.5}
-        revealDuration={1}
-        characterSet={[" "]}
-        characters={` ${currentHouse}!`}
-        onComplete={() => {
-          _setIsSortHouse(false);
-        }}
-      />
-    );
-  }, [currentHouse, _isSortHouse]);
-
   return (
     <div>
       <h1>Current House:</h1>
       <p>
-        {/* {studentData && studentData.CurrentHouse ? ( */}
-        <span>You will be sorted into:</span>
-        <span
-          style={{
-            fontSize: "2rem",
-            fontWeight: "bold",
-            color: "red",
-          }}
-        >
-          {ShowHouse}
-        </span>
-        {/* ) : (
-          "You are not a student yet"
-        )} */}
+        {currentHouse ? (
+          <>
+            <span>You will be sorted into:</span>
+            <span
+              style={{
+                fontWeight: "bold",
+                color: "red",
+              }}
+            >
+              {` ${currentHouse}`}
+            </span>
+          </>
+        ) : (
+          "You are not belong to any house yet."
+        )}
       </p>
       <div>
         {currentHouse ? (
           <Button
             variant="contained"
             color="secondary"
-            onClick={() => {
-              console.log("Change House");
-            }}
+            onClick={handleRandomHouse}
           >
             Change House
           </Button>
