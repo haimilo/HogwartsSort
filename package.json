@@ -12,11 +12,15 @@
     "test": "gulp test"
   },
   "dependencies": {
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@microsoft/sp-core-library": "1.16.1",
     "@microsoft/sp-lodash-subset": "1.16.1",
     "@microsoft/sp-office-ui-fabric-core": "1.16.1",
     "@microsoft/sp-property-pane": "1.16.1",
     "@microsoft/sp-webpart-base": "1.16.1",
+    "@mui/icons-material": "^5.11.11",
+    "@mui/material": "^5.11.12",
     "@pnp/graph": "^3.12.1",
     "@pnp/logging": "^3.12.1",
     "@pnp/sp": "^3.12.1",
