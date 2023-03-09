@@ -1,5 +1,6 @@
 import {
   Button,
+  Chip,
   Paper,
   Table,
   TableBody,
@@ -11,7 +12,7 @@ import {
 } from "@mui/material";
 import { SPFI } from "@pnp/sp";
 import * as React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { getSP } from "../../../../pnpConfig";
 import { IStudentData } from "../IHogwartsShortProps";
 import { ICurrentHouse } from "./ICurrentHouse";
@@ -120,6 +121,21 @@ const CurrentHouse = (props: ICurrentHouse) => {
     }
   }, [currentHouse, isChangeHouse]);
 
+  const houseColor = useMemo(() => {
+    switch (currentHouse) {
+      case "Gryffindor":
+        return "warning";
+      case "Hufflepuff":
+        return "secondary";
+      case "Ravenclaw":
+        return "error";
+      case "Slytherin":
+        return "info";
+      default:
+        return "default";
+    }
+  }, [currentHouse]);
+
   return (
     <div>
       <h1>Current House:</h1>
@@ -207,7 +223,7 @@ const CurrentHouse = (props: ICurrentHouse) => {
                       {student.Email}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      {student.CurrentHouse}
+                      <Chip label={student.CurrentHouse} color={houseColor} />
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       {student.CurrentDateandTime}
