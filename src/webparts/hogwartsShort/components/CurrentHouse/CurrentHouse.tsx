@@ -180,23 +180,9 @@ const CurrentHouse = (props: ICurrentHouse) => {
             <Table sx={{ minWidth: 650 }} aria-label="simple table">
               <TableHead>
                 <TableRow>
-                  <StyledTableCell
-                    sx={{
-                      fontWeight: "bold",
-                      color: "black",
-                    }}
-                  >
-                    Full Name
-                  </StyledTableCell>
-                  <StyledTableCell
-                    align="center"
-                    sx={{
-                      fontWeight: "bold",
-                      color: "black",
-                    }}
-                  >
-                    Email
-                  </StyledTableCell>
+                  <StyledTableCell>Index</StyledTableCell>
+                  <StyledTableCell>Full Name</StyledTableCell>
+                  <StyledTableCell align="center">Email</StyledTableCell>
                   <StyledTableCell align="center">
                     Current House
                   </StyledTableCell>
@@ -206,11 +192,14 @@ const CurrentHouse = (props: ICurrentHouse) => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {_listStudent.map((student) => (
+                {_listStudent.map((student, index) => (
                   <StyledTableRow
                     key={student.FullName}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
+                    <StyledTableCell component="th" scope="row" align="center">
+                      {index + 1}
+                    </StyledTableCell>
                     <StyledTableCell component="th" scope="row">
                       {student.FullName}
                     </StyledTableCell>
