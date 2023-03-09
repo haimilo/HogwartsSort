@@ -223,7 +223,11 @@ const CurrentHouse = (props: ICurrentHouse) => {
                       {student.Email}
                     </StyledTableCell>
                     <StyledTableCell align="center">
-                      <Chip label={student.CurrentHouse} color={houseColor} />
+                      <Chip
+                        variant="outlined"
+                        label={student.CurrentHouse}
+                        color={houseColor}
+                      />
                     </StyledTableCell>
                     <StyledTableCell align="right">
                       {student.CurrentDateandTime}
