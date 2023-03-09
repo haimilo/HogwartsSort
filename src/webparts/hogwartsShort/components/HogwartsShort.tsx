@@ -3,7 +3,6 @@ import * as React from "react";
 import { useEffect, useState } from "react";
 import { getSP } from "../../../pnpConfig";
 import CurrentHouse from "./CurrentHouse/CurrentHouse";
-// import CurrentHouse from "./CurrentHouse/CurrentHouse";
 import DateTime from "./DateTime/DateTime";
 // import styles from "./HogwartsShort.module.scss";
 import { IHogwartsShortProps, IStudentData } from "./IHogwartsShortProps";
