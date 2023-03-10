@@ -59,9 +59,9 @@ const CurrentHouse = (props: ICurrentHouse) => {
     const randomHouse = HouseList[Math.floor(Math.random() * HouseList.length)];
     if (randomHouse === currentHouse) {
       handleRandomHouse();
-      _setCurrentHouse(randomHouse);
-      _setIsSortHouse(true);
     }
+    _setCurrentHouse(randomHouse);
+    _setIsSortHouse(true);
   };
 
   const UpdateStudentHouse = async () => {
