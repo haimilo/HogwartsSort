@@ -57,8 +57,7 @@ const CurrentHouse = (props: ICurrentHouse) => {
 
   const handleRandomHouse = () => {
     const randomHouse = HouseList[Math.floor(Math.random() * HouseList.length)];
-    const isSameHouse = randomHouse === currentHouse;
-    if (isSameHouse) {
+    if (randomHouse === currentHouse) {
       handleRandomHouse();
     }
     _setCurrentHouse(randomHouse);
